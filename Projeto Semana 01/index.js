@@ -13,12 +13,20 @@ app.get('/', async (req, res) => {
   res.send(filmes);
 });
 
+app.get('/filmes', async (req, res) => {
+  res.send(filmes.filter(Boolean));
+});
+
 app.get('/filmes/:id', async (req, res) => {
-  res.send(
-    filmes.find((filme) => {
-      return req.params.id == filme.numero;
-    })
-  );
+  const id = req.params.id - 1;
+  const filme = filmes[id];
+
+  if (!filme) {
+    res.send('Filme não encontrado');
+    return;
+  }
+
+  res.send(filme);
 });
 
 app.listen(port, () =>
