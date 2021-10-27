@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000; // Const para armanezar a porta do servidor
 const path = require('path');
-const { nextTick } = require('process');
 const filmes = require('./filmes');
 
 app.set('view engine', 'ejs');
@@ -59,7 +58,7 @@ app.put('/filmes/:id', (req, res) => {
   const id = req.params.id - 1;
   const numero = req.params.id;
   const { filme, lancamento, direcao } = req.body;
-  
+
   filmes[id] = {
     numero,
     filme,
