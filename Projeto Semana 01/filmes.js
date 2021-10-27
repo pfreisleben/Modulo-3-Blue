@@ -16,5 +16,5 @@ module.exports = [
     filme: 'John Wick',
     lancamento: '27/11/2014',
     direcao: 'Chad Staheslki',
-  },
+  }
 ];
