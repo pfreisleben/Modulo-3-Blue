@@ -28,16 +28,16 @@ app.post('/create', (req, res) => {
     }
   });
 
-  const id = usuarios.length + 1;
-  const { nome, email, senha } = req.body;
-  const data_cadastro = Date.now();
+  const identificador = usuarios.length + 1;
+  const { nome, nome_usuario, senha } = req.body;
+  const ultimo_acesso = Date.now();
 
   usuarios.push({
-    id,
+    identificador,
     nome,
-    email,
+    nome_usuario,
     senha,
-    data_cadastro,
+    ultimo_acesso,
   });
   res.send(`Usuário ${nome} cadastrado com sucesso!`);
 });
@@ -50,17 +50,17 @@ app.put('/update/:id', (req, res) => {
   });
 
   const index = req.params.id - 1;
-  const id = req.params.id;
-  const { nome, email, senha } = req.body;
+  const identificador = req.params.id;
+  const { nome, nome_usuario, senha } = req.body;
   console.log(usuarios[index]);
-  const data_cadastro = usuarios[index].data_cadastro;
+  const ultimo_acesso = Date.now();
 
   usuarios[index] = {
-    id,
+    identificador,
     nome,
-    email,
+    nome_usuario,
     senha,
-    data_cadastro,
+    ultimo_acesso,
   };
   res.send(`Usuário ${nome} atualizado com sucesso!`);
 });
