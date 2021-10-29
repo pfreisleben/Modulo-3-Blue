@@ -10,17 +10,17 @@ app.use(express.json());
 // GET RAIZ
 
 app.get('/read/:id', async (req, res) => {
-  const id = req.params.id;
+  const identificador = req.params.id;
   const usuario = usuarios.find((filme) => {
-    id == filme.identificador;
+    return filme.identificador == identificador;
   });
 
   if (!usuario) {
     res.send('Usuário não encontrado');
     return;
+  } else {
+    res.send(usuario);
   }
-
-  res.send(usuario);
 });
 
 app.post('/create', (req, res) => {
@@ -52,10 +52,12 @@ app.put('/update/:id', (req, res) => {
   });
 
   const index = req.params.id - 1;
+
   const identificador = req.params.id;
+
   if (
     !usuarios.find((usuario) => {
-      identificador = usuario.identificador;
+      return (identificador = usuario.identificador);
     })
   ) {
     return res.send('Usuário não encontrado');
@@ -76,9 +78,13 @@ app.put('/update/:id', (req, res) => {
 
 app.delete('/delete/:id', (req, res) => {
   const index = req.params.id - 1;
-  if (!usuarios[index]) {
-    res.send('Usuário não existe!');
-    return;
+  const identificador = req.params.id;
+  if (
+    !usuarios.find((usuario) => {
+      return (identificador = usuario.identificador);
+    })
+  ) {
+    res.send('Usuário não encontrado!');
   } else {
     usuarios.splice(index, 1);
     res.send(`Usuário ${req.params.id} excluído com sucesso!`);
