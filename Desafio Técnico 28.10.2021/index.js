@@ -52,7 +52,7 @@ app.put('/update/:id', (req, res) => {
   const index = req.params.id - 1;
   const id = req.params.id;
   const { nome, email, senha } = req.body;
-  res.send(index);
+  console.log(usuarios[index]);
   const data_cadastro = usuarios[index].data_cadastro;
 
   usuarios[index] = {
