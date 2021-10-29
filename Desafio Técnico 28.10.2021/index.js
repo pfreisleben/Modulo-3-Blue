@@ -12,7 +12,7 @@ app.get('/', async (req, res) => {
   res.send('Olá bluemer! Você acabou de enviar um GET para /');
 });
 
-app.get('/axies', async (req, res) => {
+app.get('/read', async (req, res) => {
   res.send(axies.filter(Boolean));
 });
 
