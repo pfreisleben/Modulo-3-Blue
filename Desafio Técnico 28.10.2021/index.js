@@ -52,7 +52,6 @@ app.put('/update/:id', (req, res) => {
   });
 
   const index = req.params.id - 1;
-
   const identificador = req.params.id;
 
   if (
