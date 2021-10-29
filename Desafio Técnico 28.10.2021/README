@@ -1,0 +1,40 @@
+==== API DE CADASTRO DE USUÁRIOS === 
+Tecnologia utilizada: NODEJS
+Framework: Express
+
+=>> PARA EXECUTAR O PROGRAMA, BASTA DIGITAR 'NPM START'
+
+
+==> MODELO DE USUÁRIO UTILIZADO PARA O PROJETO:
+  {
+    identificador: 1,
+    nome: 'Pedro',
+    nome_usuario: 'Freisleben',
+    senha: '123456',
+    ultimo_acesso: '29/10/2021',
+  }
+
+*** COMO PROCURAR UM USUÁRIO: ***
+
+--> UTILIZAR MÉTODO GET NA ROTA localhost:3000/read/{id_do_usuário}
+--> EXEMPLO: localhost:3000/read/1
+--> A API RETORNARÁ UM OBJETO JSON COM OS DADOS DO USUÁRIO 1.
+
+*** COMO CADASTRAR UM USUÁRIO ***
+--> UTILIZAR MÉTODO POST NA ROTA: localhost:3000/create
+--> DEVERÁ SER ENVIADO UM JSON COM OS SEGUINTES DADOS:
+
+  {
+    nome: 'Pedro',
+    nome_usuario: 'Freisleben',
+    senha: '123456',
+  }
+
+*** COMO ATUALIZAR UM USUÁRIO ***
+--> UTILIZAR MÉTODO PUT NA ROTA: localhost:3000/update/{id_usuario}
+--> DEVERÁ SER ENVIADO UM JSON COM OS SEGUINTES DADOS:
+  {
+    nome: 'Pedro',
+    nome_usuario: 'Freisleben',
+    senha: '123456',
+  }
