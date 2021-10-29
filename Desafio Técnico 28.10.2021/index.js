@@ -2,77 +2,73 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000; // Const para armanezar a porta do servidor
 const path = require('path');
-const axies = require('./axies');
+const usuarios = require('./usuarios');
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 // GET RAIZ
-app.get('/', async (req, res) => {
-  res.send('Olá bluemer! Você acabou de enviar um GET para /');
-});
 
-app.get('/read', async (req, res) => {
-  res.send(axies.filter(Boolean));
-});
+app.get('/read/:id', async (req, res) => {
+  const id = req.params.id - 1;
+  const usuario = usuarios[id];
 
-app.get('/axies/:id', async (req, res) => {
-  const id = --req.params.id;
-  const axie = axies[id];
-
-  if (!axie) {
-    res.send('Axie não encontrado');
+  if (!usuario) {
+    res.send('Usuário não encontrado');
     return;
   }
 
-  res.send(axie);
+  res.send(usuario);
 });
 
-app.post('/axies', (req, res) => {
+app.post('/create', (req, res) => {
   Object.keys(req.body).forEach((elemento) => {
     if (!req.body[elemento]) {
       return res.send('Por favor alimente todos os campos.');
     }
   });
 
-  const id = axies.length + 1;
-  const { classe, breed_count, owner, stats } = req.body;
+  const id = usuarios.length + 1;
+  const { nome, email, senha } = req.body;
+  const data_cadastro = Date.now();
 
-  axies.push({
+  usuarios.push({
     id,
-    classe,
-    breed_count,
-    owner,
-    stats,
+    nome,
+    email,
+    senha,
+    data_cadastro,
   });
-  res.send(axies);
+  res.send(`Usuário ${nome} cadastrado com sucesso!`);
 });
 
-app.put('/axies/:id', (req, res) => {
+app.put('/update/:id', (req, res) => {
   Object.keys(req.body).forEach((elemento) => {
     if (!req.body[elemento]) {
       return res.send('Por favor alimente todos os campos.');
     }
   });
 
-  const numero = req.params.id - 1;
+  const index = req.params.id - 1;
   const id = req.params.id;
-  const { classe, breed_count, owner, stats } = req.body;
+  const { nome, email, senha } = req.body;
+  res.send(index);
+  const data_cadastro = usuarios[index].data_cadastro;
 
-  axies[numero] = {
+  usuarios[index] = {
     id,
-    classe,
-    breed_count,
-    owner,
-    stats,
+    nome,
+    email,
+    senha,
+    data_cadastro,
   };
-  res.send(axies);
+  res.send(`Usuário ${nome} atualizado com sucesso!`);
 });
 
-app.delete('/axies/:id', (req, res) => {
-  const id = --req.params.id;
-  delete axies[id];
-  res.send(axies);
+app.delete('/delete/:id', (req, res) => {
+  const index = req.params.id - 1;
+  usuarios.splice(index, 1);
+  res.send(`Usuário ${req.params.id} excluído com sucesso!`);
 });
 
 app.listen(port, () =>
