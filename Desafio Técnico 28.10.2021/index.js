@@ -10,8 +10,10 @@ app.use(express.json());
 // GET RAIZ
 
 app.get('/read/:id', async (req, res) => {
-  const id = req.params.id - 1;
-  const usuario = usuarios[id];
+  const id = req.params.id;
+  const usuario = usuarios.find((filme) => {
+    id == filme.identificador;
+  });
 
   if (!usuario) {
     res.send('Usuário não encontrado');
@@ -51,18 +53,25 @@ app.put('/update/:id', (req, res) => {
 
   const index = req.params.id - 1;
   const identificador = req.params.id;
-  const { nome, nome_usuario, senha } = req.body;
-  console.log(usuarios[index]);
-  const ultimo_acesso = Date.now();
+  if (
+    !usuarios.find((usuario) => {
+      identificador = usuario.identificador;
+    })
+  ) {
+    return res.send('Usuário não encontrado');
+  } else {
+    const { nome, nome_usuario, senha } = req.body;
+    const ultimo_acesso = Date.now();
 
-  usuarios[index] = {
-    identificador,
-    nome,
-    nome_usuario,
-    senha,
-    ultimo_acesso,
-  };
-  res.send(`Usuário ${nome} atualizado com sucesso!`);
+    usuarios[index] = {
+      identificador,
+      nome,
+      nome_usuario,
+      senha,
+      ultimo_acesso,
+    };
+    res.send(`Usuário ${nome} atualizado com sucesso!`);
+  }
 });
 
 app.delete('/delete/:id', (req, res) => {
