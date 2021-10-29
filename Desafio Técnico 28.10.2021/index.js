@@ -67,8 +67,13 @@ app.put('/update/:id', (req, res) => {
 
 app.delete('/delete/:id', (req, res) => {
   const index = req.params.id - 1;
-  usuarios.splice(index, 1);
-  res.send(`Usuário ${req.params.id} excluído com sucesso!`);
+  if (!usuarios[index]) {
+    res.send('Usuário não existe!');
+    return;
+  } else {
+    usuarios.splice(index, 1);
+    res.send(`Usuário ${req.params.id} excluído com sucesso!`);
+  }
 });
 
 app.listen(port, () =>
