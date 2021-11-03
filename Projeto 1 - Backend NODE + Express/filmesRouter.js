@@ -11,7 +11,7 @@ router.get('/listar', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  const id = --req.params.id;
+  const id = req.params.id - 1;
   const filme = filmes[id];
 
   if (!filme) {
@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
 
   campos.forEach((elemento) => {
     if (!req.body[elemento]) {
-      res.send(400).json({ message: `${elemento} na requisição esta vazio` });
+      res.status(400).json({ message: `${elemento} na requisição esta vazio` });
       return;
     }
   });
@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
     direcao,
   });
 
-  res.send(200).json({ message: 'Cadastrado com sucesso! ' });
+  res.status(200).json({ message: 'Cadastrado com sucesso! ' });
 });
 
 router.put('/:id', (req, res) => {
@@ -59,19 +59,19 @@ router.put('/:id', (req, res) => {
   const numero = req.params.id;
   const { filme, lancamento, direcao } = req.body;
 
-  filmes[id] = {
+  filmes[index] = {
     numero,
     filme,
     lancamento,
     direcao,
   };
-  res.send(filmes);
+  res.send(200).json({ message: 'Cadastrado com sucesso!' });
 });
 
-router.delete('/filmes/:id', (req, res) => {
-  const id = --req.params.id;
-  delete filmes[id];
-  res.send('Filme exclúido com sucesso');
+router.delete('/:id', (req, res) => {
+  const id = req.params.id - 1;
+  filmes.splice(id, 1);
+  res.status(200).json(filmes);
 });
 
 module.exports = router;
