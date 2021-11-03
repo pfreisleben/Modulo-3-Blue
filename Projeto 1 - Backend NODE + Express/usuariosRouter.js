@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  const campos = ['classe', 'breed_count', 'owner', 'stats'];
+  const campos = ['nome', 'nome_usuario', 'senha'];
 
   campos.forEach((elemento) => {
     if (!req.body[elemento]) {
@@ -58,17 +58,18 @@ router.put('/:id', (req, res) => {
   });
 
   const index = req.params.id - 1;
-  const id = req.params.id;
-  const { classe, breed_count, owner, stats } = req.body;
+  const identificador = req.params.id;
+  const { nome, nome_usuario, senha } = req.body;
+  const ultimo_acesso = Date.now();
 
   usuarios[index] = {
-    id,
-    classe,
-    breed_count,
-    owner,
-    stats,
+    identificador,
+    nome,
+    nome_usuario,
+    senha,
+    ultimo_acesso,
   };
-  res.send(200).json({ message: 'Cadastrado com sucesso!' });
+  res.status(200).json({ message: 'Cadastrado com sucesso!' });
 });
 
 router.delete('/:id', (req, res) => {
