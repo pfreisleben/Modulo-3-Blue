@@ -67,7 +67,7 @@ router.put('/:id', (req, res) => {
     owner,
     stats,
   };
-  res.send(200).json({ message: 'Cadastrado com sucesso!' });
+  res.status(200).json({ message: 'Cadastrado com sucesso!' });
 });
 
 router.delete('/:id', (req, res) => {

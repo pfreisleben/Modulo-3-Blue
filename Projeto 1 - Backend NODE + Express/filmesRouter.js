@@ -65,7 +65,7 @@ router.put('/:id', (req, res) => {
     lancamento,
     direcao,
   };
-  res.send(200).json({ message: 'Cadastrado com sucesso!' });
+  res.status(200).json({ message: 'Editado com sucesso!' });
 });
 
 router.delete('/:id', (req, res) => {
