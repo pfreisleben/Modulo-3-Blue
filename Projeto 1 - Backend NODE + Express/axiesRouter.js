@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const campos = ['axie', 'lancamento', 'direcao'];
+  const campos = ['classe', 'breed_count', 'owner', 'stats'];
 
   campos.forEach((elemento) => {
     if (!req.body[elemento]) {
@@ -32,21 +32,22 @@ router.post('/', (req, res) => {
     }
   });
 
-  const numero = axies.length + 1;
-  const { axie, lancamento, direcao } = req.body;
+  const id = axies.length + 1;
+  const { classe, breed_count, owner, stats } = req.body;
 
   axies.push({
-    numero,
-    axie,
-    lancamento,
-    direcao,
+    id,
+    classe,
+    breed_count,
+    owner,
+    stats,
   });
 
   res.status(200).json({ message: 'Cadastrado com sucesso! ' });
 });
 
 router.put('/:id', (req, res) => {
-  const campos = ['axie', 'lancamento', 'direcao'];
+  const campos = ['classe', 'breed_count', 'owner', 'stats'];
 
   campos.forEach((elemento) => {
     if (!req.body[elemento]) {
@@ -56,14 +57,15 @@ router.put('/:id', (req, res) => {
   });
 
   const index = req.params.id - 1;
-  const numero = req.params.id;
-  const { axie, lancamento, direcao } = req.body;
+  const id = req.params.id;
+  const { classe, breed_count, owner, stats } = req.body;
 
   axies[index] = {
-    numero,
-    axie,
-    lancamento,
-    direcao,
+    id,
+    classe,
+    breed_count,
+    owner,
+    stats,
   };
   res.send(200).json({ message: 'Cadastrado com sucesso!' });
 });
