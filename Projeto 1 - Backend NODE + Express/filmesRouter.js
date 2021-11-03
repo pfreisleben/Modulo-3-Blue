@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
   res.status(200).json({ message: 'Bem vindo a API!' });
 });
 
-router.get('/filmes', async (req, res) => {
+router.get('/listar', async (req, res) => {
   res.status(200).json(filmes.filter(Boolean));
 });
 
@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/filmes', (req, res) => {
+router.post('/', (req, res) => {
   const campos = ['filme', 'lancamento', 'direcao'];
 
   campos.forEach((elemento) => {
@@ -55,7 +55,7 @@ router.put('/:id', (req, res) => {
     }
   });
 
-  const id = req.params.id - 1;
+  const index = req.params.id - 1;
   const numero = req.params.id;
   const { filme, lancamento, direcao } = req.body;
 
