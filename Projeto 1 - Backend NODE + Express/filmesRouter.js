@@ -1,31 +1,34 @@
 const express = require('express');
-const filmes = require('./filmes');
 const router = express.Router();
+const filmes = require('./filmes');
 
 router.get('/', async (req, res) => {
   res.status(200).json({ message: 'Bem vindo a API!' });
 });
 
 router.get('/filmes', async (req, res) => {
-  res.send(filmes.filter(Boolean));
+  res.status(200).json(filmes.filter(Boolean));
 });
 
-router.get('/filmes/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const id = --req.params.id;
   const filme = filmes[id];
 
   if (!filme) {
-    res.send('Filme não encontrado');
+    res.status(400).json({ message: 'Filme não encontrado!' });
     return;
+  } else {
+    res.status(200).json(filme);
   }
-
-  res.send(filme);
 });
 
 router.post('/filmes', (req, res) => {
-  Object.keys(req.body).forEach((elemento) => {
+  const campos = ['filme', 'lancamento', 'direcao'];
+
+  campos.forEach((elemento) => {
     if (!req.body[elemento]) {
-      return res.send('Por favor alimente todos os campos.');
+      res.send(400).json({ message: `${elemento} na requisição esta vazio` });
+      return;
     }
   });
 
@@ -39,13 +42,16 @@ router.post('/filmes', (req, res) => {
     direcao,
   });
 
-  res.send(filmes);
+  res.send(200).json({ message: 'Cadastrado com sucesso! ' });
 });
 
-router.put('/filmes/:id', (req, res) => {
-  Object.keys(req.body).forEach((elemento) => {
+router.put('/:id', (req, res) => {
+  const campos = ['filme', 'lancamento', 'direcao'];
+
+  campos.forEach((elemento) => {
     if (!req.body[elemento]) {
-      return res.send('Por favor alimente todos os campos.');
+      res.send(400).json({ message: `${elemento} na requisição esta vazio` });
+      return;
     }
   });
 
