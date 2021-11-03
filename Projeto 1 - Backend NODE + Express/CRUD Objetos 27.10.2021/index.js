@@ -1,13 +1,9 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000; // Const para armanezar a porta do servidor
-const path = require('path');
 const filmes = require('./filmes');
 
-app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: true }));
-// GET RAIZ
+app.use(express.json());
+
 app.get('/', async (req, res) => {
   res.send('Olá bluemer! Você acabou de enviar um GET para /');
 });
