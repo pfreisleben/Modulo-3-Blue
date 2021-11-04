@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Conn = async () => {
   await mongoose
-    .connect('mongodb://localhost:27017/Projeto2', {
+    .connect('mongodb://localhost:27017/projeto2', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
@@ -10,7 +10,7 @@ const Conn = async () => {
       console.log('MongoDB esta conectado');
     })
     .catch((err) => {
-      console.error(err);
+      console.log(err);
     });
 };
 
