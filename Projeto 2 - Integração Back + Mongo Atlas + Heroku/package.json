@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^6.0.12",
+    "mongodb": "^4.1.4",
+    "mongoose": "^5.13.7",
     "nodemon": "^2.0.14"
   }
 }
