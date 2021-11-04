@@ -7,6 +7,6 @@ const cidadesModel = new mongoose.Schema({
   dtAniversario: { type: Date, required: true },
 });
 
-const Cidade = mongoose.model('Cidades', cidadesModel);
+const Cidade = mongoose.model('cidades', cidadesModel);
 
 module.exports = Cidade;
