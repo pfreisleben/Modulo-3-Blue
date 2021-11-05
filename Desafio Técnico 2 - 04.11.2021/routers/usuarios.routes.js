@@ -48,7 +48,7 @@ router.post('/create', async (req, res) => {
 
 router.put('/update/:id', async (req, res) => {
   const id = req.params.id;
-  const { nome, qtdBairros, populacao, dtAniversario } = req.body;
+  const { nome, nomeUsuario, senha, dtUltimoAcesso } = req.body;
 
   const usuario = await Usuario.findById(id);
 
@@ -57,12 +57,16 @@ router.put('/update/:id', async (req, res) => {
     return;
   }
 
-  if (!nome || !qtdBairros || !populacao || !dtAniversario) {
+  if (!nome || !nomeUsuario || !senha || !dtUltimoAcesso) {
     res
       .status(400)
       .send({ messagem: 'Objeto inválido. Algum campo está com valor vazio.' });
     return;
   }
+
+  await Usuario.findOneAndUpdate({ _id: id }, req.body).then(() => {
+    res.status(200).send({ message: 'Usuário atualizado com sucesso!' });
+  });
 });
 
 module.exports = router;
