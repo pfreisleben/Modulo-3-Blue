@@ -47,4 +47,23 @@ router.post('/add', async (req, res) => {
   }
 });
 
+router.put('/update/:id', async (req, res) => {
+  const id = req.params.id;
+  const { nome, qtdBairros, populacao, dtAniversario } = req.body;
+
+  const cidade = await Cidade.findById(id);
+
+  if (!cidade) {
+    res.status(404).send({ message: 'Objeto não encontrado' });
+    return;
+  }
+
+  if (!nome || !qtdBairros || !populacao || !dtAniversario) {
+    res
+      .status(400)
+      .send({ messagem: 'Objeto inválido. Algum campo está com valor vazio.' });
+    return;
+  }
+});
+
 module.exports = router;
