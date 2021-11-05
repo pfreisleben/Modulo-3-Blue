@@ -27,10 +27,10 @@ router.get('/read/:id', async (req, res) => {
   }
 });
 
-router.post('/add', async (req, res) => {
-  const { nome, qtdBairros, populacao, dtAniversario } = req.body;
+router.post('/create', async (req, res) => {
+  const { nome, nomeUsuario, senha, dtUltimoAcesso } = req.body;
 
-  if (!nome || !qtdBairros || !populacao || !dtAniversario) {
+  if (!nome || !nomeUsuario || !senha || !dtUltimoAcesso) {
     res
       .status(400)
       .send({ messagem: 'Objeto inválido. Algum campo está com valor vazio.' });
