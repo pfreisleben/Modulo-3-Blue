@@ -1,6 +1,6 @@
 ==== DESAFIO TÉCNICO 02 - API DE CADASTRO DE USUÁRIOS === 
 Tecnologia utilizada: NODEJS
-Banco de dados: MONGODB
+Banco de dados: MONGODB COM ATLAS
 Framework: Express
 Outras tecnologias: ThunderClient
 
