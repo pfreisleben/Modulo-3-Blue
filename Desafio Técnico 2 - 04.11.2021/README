@@ -1,43 +1,30 @@
 ==== DESAFIO TÉCNICO 02 - API DE CADASTRO DE USUÁRIOS === 
 Tecnologia utilizada: NODEJS
+Banco de dados: MONGODB
 Framework: Express
+Outras tecnologias: ThunderClient
 
-=>> PARA EXECUTAR O PROGRAMA, BASTA DIGITAR 'NPM START'
-
-
-==> MODELO DE USUÁRIO UTILIZADO PARA O PROJETO:
-  {
-    identificador: 1,
-    nome: 'Pedro',
-    nome_usuario: 'Freisleben',
-    senha: '123456',
-    ultimo_acesso: '29/10/2021',
-  }
-
-                                  *** COMO PROCURAR UM USUÁRIO: ***
-
---> UTILIZAR MÉTODO GET NA ROTA localhost:3000/read/{id_do_usuário}
---> EXEMPLO: localhost:3000/read/1
---> A API RETORNARÁ UM OBJETO JSON COM OS DADOS DO USUÁRIO 1.
-
-                                  *** COMO CADASTRAR UM USUÁRIO ***
---> UTILIZAR MÉTODO POST NA ROTA: localhost:3000/create
---> DEVERÁ SER ENVIADO UM JSON NO SEGUINTE FORMATO:
-
-  {
-    nome: 'Pedro',
-    nome_usuario: 'Freisleben',
-    senha: '123456',
-  }
-
-                                  *** COMO ATUALIZAR UM USUÁRIO ***
---> UTILIZAR MÉTODO PUT NA ROTA: localhost:3000/update/{id_usuario}
---> DEVERÁ SER ENVIADO UM JSON NO SEGUINTE FORMATO:
-  {
-    nome: 'Pedro',
-    nome_usuario: 'Freisleben',
-    senha: '123456',
-  }
-
-                                  *** COMO DELETAR UM USUÁRIO ***
---> UTILIZAR MÉTODO DELETE NA ROTA: localhost:3000/delete/{id_usuario}
+=>> PARA EXECUTAR O PROGRAMA, BASTA DIGITAR 'NPM START' NO TERMINAL
+==> O SERVIDOR POSSUI 06 ROTAS:
+LINK: HTTP://LOCALHOST:3000
+ROTAS:
+1 - /usuarios - TESTA SE API ESTÁ RESPONDENDO
+2 - /usuarios/readall - RETORNA TODOS OS USUARIOS DO BANCO
+3 - /usuarios/read/:id - RETORNA UM USUARIO ESPECIFICO PASSANDO ID
+4 - /usuarios/create - CRIA UM NOVO OBJETO(USUARIO) NO BANCO
+    NA ROTA CREATE É ESPERADO UM JSON COM OS SEGUINTES ATRIBUTOS
+    {
+      nome: { type: String, required: true },
+      nomeUsuario: { type: String, required: true },
+      senha: { type: String, required: true },
+      dtUltimoAcesso: { type: Date, required: true },
+    }
+5 - /usuarios/update/:id - ATUALIZA UM OBJETO NO BANCO PASSANDO id
+    NA ROTA UPDATE É ESPERADO UM JSON COM OS SEGUINTES ATRIBUTOS
+    {
+      nome: { type: String, required: true },
+      nomeUsuario: { type: String, required: true },
+      senha: { type: String, required: true },
+      dtUltimoAcesso: { type: Date, required: true },
+    }
+6 - /usuarios/delete/:id - DELETA UM OBJETO DO BANCO PASSANDO ID
