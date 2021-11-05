@@ -6,20 +6,19 @@ router.get('/', (req, res) => {
   res.status(200).json({ message: 'Rota de usuarios funcionando!' });
 });
 
-router.get('/listall', async (req, res) => {
-  await Usuario.find({})
-    .then((usuarios) => {
-      console.log(usuarios);
-      res.status(200).json(usuarios);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+router.get('/readall', async (req, res) => {
+  const usuario = await Usuario.find({});
+  if (usuario.length === 0) {
+    res.status(404).send({ message: 'Objeto não encontrado' });
+    return;
+  } else {
+    res.status(200).json(usuario);
+  }
 });
 
-router.get('/listname/:name', async (req, res) => {
-  const name = req.params.name;
-  const usuario = await Usuario.find({ nome: name });
+router.get('/read/:id', async (req, res) => {
+  const id = req.params.id;
+  const usuario = await Usuario.find({ _id: id });
   if (usuario.length === 0) {
     res.status(404).send({ message: 'Objeto não encontrado' });
     return;

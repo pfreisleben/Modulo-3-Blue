@@ -8,14 +8,8 @@ Conn();
 
 const port = 3000;
 
-const usuariosRouter = require('./routers/');
-app.use('/cidades', cidadesRouter);
-
-const estadosRouter = require('./routers/estados.routes');
-app.use('/estados', estadosRouter);
-
-const paisesRouter = require('./routers/paises.routes');
-app.use('/paises', paisesRouter);
+const usuariosRouter = require('./routers/usuarios.routes');
+app.use('/usuarios', usuariosRouter);
 
 app.listen(port, () => {
   console.log(`Servidor rodando em: http://localhost:${port}`);
