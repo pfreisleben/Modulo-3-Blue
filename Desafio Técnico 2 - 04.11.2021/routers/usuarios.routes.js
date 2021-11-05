@@ -69,4 +69,19 @@ router.put('/update/:id', async (req, res) => {
   });
 });
 
+router.delete('/delete/:id', async (req, res) => {
+  const id = req.params.id;
+
+  const usuario = await Usuario.findById(id);
+
+  if (!usuario) {
+    res.status(404).send({ message: 'Objeto não encontrado' });
+    return;
+  }
+
+  await Usuario.deleteOne({ _id: id }).then(() => {
+    res.status(200).send({ message: 'Usuário deletado com sucesso!' });
+  });
+});
+
 module.exports = router;
