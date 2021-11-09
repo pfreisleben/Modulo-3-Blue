@@ -64,6 +64,25 @@ router.put('/update/:id', async (req, res) => {
       .send({ messagem: 'Objeto inválido. Algum campo está com valor vazio.' });
     return;
   }
+
+  await Cidade.findOneAndUpdate({ _id: id }, req.body).then(() => {
+    res.status(200).json({ message: 'Atualizado com sucesso!' });
+  });
+});
+
+router.delete('/delete/:id', async (req, res) => {
+  const id = req.params.id;
+
+  const cidade = await Cidade.findById(id);
+
+  if (!cidade) {
+    res.status(404).send({ message: 'Objeto não encontrado' });
+    return;
+  }
+
+  await Cidade.deleteOne({ _id: id }, req.body).then(() => {
+    res.status(200).json({ message: 'Deletado com sucesso!' });
+  });
 });
 
 module.exports = router;
