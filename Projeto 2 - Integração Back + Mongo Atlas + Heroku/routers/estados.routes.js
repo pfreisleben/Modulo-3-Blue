@@ -57,7 +57,7 @@ router.put('/update/:id', async (req, res) => {
     res.status(404).send({ message: 'Objeto não encontrado' });
     return;
   }
-  
+
   if (!nome || !regiao || !populacao || !vlrSalarioMin) {
     res
       .status(400)
@@ -66,6 +66,21 @@ router.put('/update/:id', async (req, res) => {
   }
   await Estado.findOneAndUpdate({ _id: id }, req.body).then(() => {
     res.status(200).json({ message: 'Atualizado com sucesso!' });
+  });
+});
+
+router.delete('/delete/:id', async (req, res) => {
+  const id = req.params.id;
+
+  const estado = await Estado.findById(id);
+
+  if (!estado) {
+    res.status(404).send({ message: 'Objeto não encontrado' });
+    return;
+  }
+
+  await Estado.deleteOne({ _id: id }, req.body).then(() => {
+    res.status(200).json({ message: 'Deletado com sucesso!' });
   });
 });
 
